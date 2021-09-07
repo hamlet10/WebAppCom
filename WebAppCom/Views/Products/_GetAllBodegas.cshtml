@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="display settingsTable" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Bodegas
+                        </th>
+                        <th>
+                            Stock
+                        </th>
+                        <th>
+                            Minimo
+                        </th>
+                        <th>
+                            Maximo
+                        </th>
+                        <th>
+                            DiasReposicion
+                        </th>
+                        <th>
+                            CantidadMinima
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in @ViewBag.Bodegas)
+                    {
+                        <tr>
+                            <td>
+                                @item.Bodega.Description
+                            </td>
+                            <td>
+                                @item.Stock
+                            </td>
+                            <td>
+                                @item.Min
+                            </td>
+                            <td>
+                                @item.Max
+                            </td>
+                            <td>
+                                @item.MakeUpDay
+                            </td>
+                            <td>
+                                @item.MinQuantity
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

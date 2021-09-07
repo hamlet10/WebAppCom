@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Bodegas";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="pr-2">
+                            <a type="button" asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light border-left ">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <section class="content">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Nueva Bodega</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="PartialBodega">
+                                                    @await Html.PartialAsync("_BodegaAddOrEdit", new WebAppCom.Models.Bodega())
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-md-8">
+                            <partial name="_BodegaPartialView.cshtml" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Lista de Bodega-Productos</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table settingsTable" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Bodega
+                                        </th>
+                                        <th>
+                                            Producto
+                                        </th>
+                                        <th>
+                                            Stock
+                                        </th>
+                                        <th>
+                                            Maximo
+                                        </th>
+                                        <th>
+                                            Minimo
+                                        </th>
+                                        <th>
+                                            Reposición
+                                        </th>
+                                        <th>
+                                            Entraga
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in @ViewBag.bp)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Bodega.Description
+                                            </td>
+                                            <td>
+                                                @item.Product.Description
+                                            </td>
+                                            <td>
+                                                @item.Stock
+                                            </td>
+                                            <td>
+                                                @item.Max
+                                            </td>
+                                            <td>
+                                                @item.Min
+                                            </td>
+                                            <td>
+                                                @item.MakeUpDay
+                                            </td>
+                                            <td>
+                                                @item.MinQuantity
+                                            </td>
+                                            <td class="text-center">
+                                                <a onclick="deleteBP(@item.BodegaId, @item.ProductId, '/Bodega/BodegaProductoProductoDelete/')"
+                                                   class="text-danger">
+                                                    <i class="fa fa-trash fa-lg"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+        function loadPartialBodega(id) {
+            $('#PartialBodega').load('/Bodega/GetPartialBodega/' + id);
+        };
+    </script>
+}

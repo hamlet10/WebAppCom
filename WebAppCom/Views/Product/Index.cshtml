@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebAppCom.Models.Product>
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Index">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="department" class="form-control" id="SelectDpto">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="subcategory" placeholder="Buscar por Nombre">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" name="name" value="Buscar" class="btn btn-light border-info @ViewBag.buscar" />
+                    <input type="submit" name="restar" value="Buscar/Restaurar" class="btn btn-primary @ViewBag.restore" />
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        <a asp-action="Create" class="btn btn-primary float-right">Producto <i class="fas fa-plus-square"></i></a>
+                    </p>
+                </div>
+            </div>
+        </form>
+
+        <hr />
+
+        <h3>@ViewBag.subtitle</h3>
+        <br />
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item != null)
+                {
+                    <div class="col-sm-3">
+                        <div class="card scroll-smooth" style="width: Auto; height: 450px;">
+                            <div class="card-header rounded mx-auto d-block" style=" width: 200px; height: 200px;">
+                                <img src="~/Source/@item.ImagePath" alt="" style=" width: 70%; min-height: 100px;">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><p class="text-bold d-inline">@item.Description</p></h5>
+                                <p class="card-text text-truncate">@item.Note</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><p class="text-bold d-inline">Departamento: </p>@item.Department.Description</li>
+                                <li class="list-group-item"><p class="text-bold d-inline">Precio: </p>$ <i class="money">@item.Price</i></li>
+                                <li class="list-group-item">@item.MeasureNavigation.Description = @item.Measure</li>
+                                <li class="list-group-item">
+                                    <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-sm btn-primary float-left">
+                                        Mas...
+                                        <i class="fas fa-pen-alt"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,146 @@
+﻿@model WebAppCom.Models.Product
+
+@{
+    ViewData["Title"] = "Detalles del Producto";
+}
+
+
+<!-- Default box -->
+<div class="card card-solid">
+    <div class="card-header">
+        <a asp-action="Index" class="btn btn-light border-dark float-left"><i class="fas fa-arrow-left d-inline"></i></a>
+        <div class="float-right">
+            <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-light border-dark">
+                Editar
+                <i class="fas fa-pen-alt"></i>
+            </a>
+            |
+            <a class="btn btn-outline-primary" onclick="showInPopup('@Url.Action("AddImagenes","Product",new { id = Model.ProductId},Context.Request.Scheme)','Agregar Imagen')">
+                <i class="fa fa-image fa-fw hover" aria-hidden="true"></i>&nbsp; Imagenes
+            </a>
+            |
+            <a class="btn btn-outline-primary" onclick="showInPopup('@Url.Action("AddBarCode","Product",new { id = Model.ProductId},Context.Request.Scheme)','Asignar Codigo de Barras')">
+                <i class="fa fa-barcode fa-fw hover" aria-hidden="true"></i>&nbsp; Barras
+            </a>
+            |
+            <a class="btn btn-outline-success" onclick="showInPopup('@Url.Action("AddBodega","Product",new { id = Model.ProductId})','Asignar Bodega')">
+                <i class="fa fa-building fa-fw hover" aria-hidden="true"></i>&nbsp; Bodega
+            </a>
+            |
+            <a onclick="deleteProduct(@Model.ProductId, '/Product/Delete/')"
+               class="text-danger">
+                <i class="fa fa-trash fa-lg"></i>
+            </a>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3 class="d-inline-block d-sm-none"></h3>
+                <div class="col-12" style="width:1000px; height:500px;">
+                    @if (@ViewBag.FirstPhoto != null)
+                    {
+                        <img src="~/Source/@ViewBag.FirstPhoto" 
+                             class="product-image" 
+                             alt="Product Image"
+                             style="width:1000px; height:500px;">
+                    }
+                    else
+                    {
+                        <img src="~/Source/nodisponible.png" class="product-image" alt="Product Image"
+                             style="width:1000px; height:500px;">
+                    }
+                </div>
+                <div class="col-12 product-image-thumbs">
+                    @for (int i = 0; i < ViewBag.photosCount; i++)
+                    {
+                        <div class="product-image-thumb active">
+                            <img src="~/Source/@ViewBag.photos[i].ImagePath" alt="Product Image" style="width: 85px; height: 85px;">
+                        </div>
+                    }
+                    @if (ViewBag.photosCount <= 4)
+                    {
+                        <a class="btn border-dark" onclick="showInPopup('@Url.Action("AddImagenes","Product",new { id = Model.ProductId},Context.Request.Scheme)','Agregar Imagen')">
+                            <div class="col-sm-12" style="width:85px; height:85px;">
+                                @*<i class="fa fa-image fa-fw hover" aria-hidden="true"></i>&nbsp; Imagen*@
+
+                                <p class="text align-content-md-center pt-4 mt-2">
+                                    <i class="far fa-plus-square fa-2x" aria-hidden="true"></i>
+                                </p>
+                            </div>
+                        </a>
+
+                    }
+                </div>
+            </div>  
+            <div class="col-12 col-sm-6">
+                <!-- Información General -->
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-default text-center active">
+                        <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
+                        <i class="fas fa-building"></i>
+                        @Model.Department.Description
+                    </label>
+                </div>
+
+                <h3 class="my-3">@Model.Description</h3>
+                <p>@Model.Note</p>
+                <hr>
+                <!-- Codigo de Barras -->
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-default text-center">
+                        <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                        @if (@ViewBag.valor != null)
+                        {
+                            <barcode content="@ViewBag.valor" width="200" height="100" />
+                        }
+                        else
+                        {
+                            <h4>Sin Codigo de barras</h4>
+                        }
+                        <br />
+                        @ViewBag.valor
+                    </label>
+                </div>
+
+                <!-- Precio y Porcentaje -->
+                <div class="bg-gray py-2 px-3 mt-4">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2 class="mb-0">
+                                Precio: <a class="money">@Model.Price</a>
+                            </h2>
+                            <h4 class="mt-0">
+                                <small>@Model.Iva.Description: @Model.Iva.Rate </small>
+                                <br />
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <!-- Parametros de Bodegas -->
+                <div class="card card-light">
+                    <div class="card-header">
+                        Almacenes
+                    </div>
+                    <div class="card-body">
+                        <partial name="_GetAllBodegas.cshtml" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->
+
+
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>

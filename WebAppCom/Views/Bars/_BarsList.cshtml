@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebAppCom.Models.Bar>
+
+@{
+    ViewData["Title"] = "Administración de Codigos de Barras";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="pr-2">
+                            <a type="button" asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light border-left ">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <partial name="_BarsPartialView.cshtml" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts {
+
+}

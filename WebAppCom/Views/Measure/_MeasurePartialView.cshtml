@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebAppCom.Models.Measure>
+
+<div class="table-responsive-md">
+    <table class="table settingsTable" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Abbreviation)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Abbreviation)
+                    </td>
+                    <td class="text-center">
+                        <a onclick="loadPartialMeasure(@item.MeasureId)"><i class="fa fa-marker fa-lg"></i></a> |
+
+                        <a onclick="deleteItem(@item.MeasureId, '/Measure/MeasureDelete/')"
+                           class="text-danger">
+                            <i class="fa fa-trash fa-lg"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

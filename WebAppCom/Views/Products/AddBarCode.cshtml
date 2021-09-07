@@ -1,0 +1,39 @@
+﻿@model WebAppCom.Models.Product
+
+@{
+    ViewData["Title"] = "Codigo de Barra";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddBarCode" asp-route-id="@Model.ProductId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <input type="hidden" asp-for="ProductId" />
+
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Nuevo Codigo</label>
+                <div class="input-group mb-2">
+                    <input type="text"  
+                           name="valor" 
+                           class="form-control text-center" 
+                           id="inlineFormInputGroup"
+                           value="@ViewBag.barcodereturn">
+                    <div class="input-group-prepend">
+                         <input type="submit" value="Aceptar" class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="alert-warning text-center" role="alert">
+            <h5>@ViewBag.empMessenger</h5>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

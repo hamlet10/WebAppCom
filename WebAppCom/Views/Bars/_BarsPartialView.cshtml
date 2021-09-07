@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebAppCom.Models.Bar>
+<div class="table-responsive-md">
+    <table class="table settingsTable" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Producto
+                </th>
+                <th>
+                    Codigo de Barras
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bar1)
+                </td>
+                <td class="text-center">
+                    <a onclick="deleteItem(@item.ProductId, '/Bars/BarsDelete/')"
+                       class="text-danger">
+                        <i class="fa fa-trash fa-lg"></i>
+                    </a>
+                </td>
+            </tr>
+             }
+        </tbody>
+    </table>
+</div>

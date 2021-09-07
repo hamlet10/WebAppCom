@@ -1,0 +1,128 @@
+﻿@model WebAppCom.Models.Client
+
+@{
+    ViewData["Title"] = "Nuevo Cliente";
+}
+
+
+<section class="content">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Información del Cliente Obligatória</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="DocumentTypeId" class="control-label"></label>
+                                    <select asp-for="DocumentTypeId" class="form-control" asp-items="ViewBag.DocumentTypeId"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Document" class="control-label"></label>
+                                    <input asp-for="Document" class="form-control" />
+                                    <span asp-validation-for="Document" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TradeName" class="control-label"></label>
+                            <input asp-for="TradeName" class="form-control" />
+                            <span asp-validation-for="TradeName" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ContactName" class="control-label"></label>
+                                    <input asp-for="ContactName" class="form-control" />
+                                    <span asp-validation-for="ContactName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ContactLastName" class="control-label"></label>
+                                    <input asp-for="ContactLastName" class="form-control" />
+                                    <span asp-validation-for="ContactLastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Más Información</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Phone1" class="control-label"></label>
+                                    <input asp-for="Phone1" class="form-control" />
+                                    <span asp-validation-for="Phone1" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Phone2" class="control-label"></label>
+                                    <input asp-for="Phone2" class="form-control" />
+                                    <span asp-validation-for="Phone2" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Anniversary" class="control-label"></label>
+                                    <input asp-for="Anniversary" class="form-control" />
+                                    <span asp-validation-for="Anniversary" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Note" class="control-label"></label>
+                            <textarea asp-for="Note" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Note" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <a asp-action="Index" class="btn btn-outline-danger">Cancelar</a>
+        <input type="submit" value="Nuevo Cliente" class="btn btn-success float-right">
+    </form>
+</section>

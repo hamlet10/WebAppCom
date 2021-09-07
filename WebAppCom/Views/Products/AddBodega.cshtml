@@ -1,0 +1,81 @@
+﻿@model WebAppCom.Models.Product
+
+@{
+    ViewData["Title"] = "Bodega";
+    Layout = null;
+}
+
+<section class="content">
+    <form asp-action="AddBodega" asp-route-id="@Model.ProductId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+        <input type="hidden" asp-for="ProductId" />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="control-label">Bodega</label>
+                    <select name="bodegaId" class="form-control" id="selectBodegas">
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Stock</label>
+                            <input name="stock" class="form-control" value="@ViewBag.bodegaProduct.Stock" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Minimo</label>
+                            <input name="min" class="form-control" value="@ViewBag.bodegaProduct.Min" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Maximo</label>
+                            <input name="max" class="form-control" value="@ViewBag.bodegaProduct.Max" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Reposicion</label>
+                            <div class="input-group date" id="dp1" data-target-input="nearest">
+                                <input name="makeUpDay" type="text" id="txtStart" class="form-control datetimepicker-input" data-target="#dp1" />
+                                <div class="input-group-append" data-target="#dp1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Orden Minima</label>
+                            <input name="minQuantity" class="form-control" value="@ViewBag.bodegaProduct.MinQuantity" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-light border-dark" type="reset">Limpiar <i class="fa fa-broom"></i></button>
+                <a asp-action="Details" asp-route-id="@Model.ProductId" class="btn btn-danger">Cancelar</a>
+                <input type="submit" value="Nuevo Producto" class="btn btn-success float-right">
+            </div>
+        </div>
+    </form>
+    <hr />
+    <div class="alert-danger text-center" role="alert">
+        @ViewBag.qrMessenger
+    </div>
+</section>
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<script>
+    getBodegas();
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebAppCom.Models.Bodega>
+
+<div class="table-responsive-md">
+    <table class="table settingsTable" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td class="text-center">
+                        <a onclick="loadPartialBodega(@item.BodegaId)"><i class="fa fa-marker fa-lg"></i></a> |
+                
+                        <a onclick="deleteItem(@item.BodegaId, '/Bodega/BodegaDelete/')"
+                            class="text-danger">
+                            <i class="fa fa-trash fa-lg"></i>
+                        </a>
+                    </td>
+                </tr>
+             }
+        </tbody>
+    </table>
+</div>

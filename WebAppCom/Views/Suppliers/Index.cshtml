@@ -1,0 +1,111 @@
+﻿@model IEnumerable<WebAppCom.Models.Supplier>
+
+@{
+    ViewData["Title"] = "Proveedores";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="pr-2">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a type="button" asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light border-dark d-inline"><i class="fas fa-arrow-left"></i></a>
+                                <a asp-action="Create" class="btn btn-sm btn-light border-dark">Proveedor <i class="fas fa-plus-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table display responsive nowrap myTable" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.DocumentNo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.DocumentType)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ContactName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ContactLastName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Address)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Phone1)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Phone2)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Note)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DocumentNo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DocumentType.Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ContactName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ContactLastName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Address)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Phone1)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Phone2)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Note)
+                                            </td>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.SupplierId" class="d-inline"><i class="fa fa-pen-alt text-primary"></i></a> |
+                                                <a onclick="deleteItem(@item.SupplierId, '/Suppliers/Delete/')"
+                                                   class="text-danger">
+                                                    <i class="fa fa-trash fa-lg"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,102 @@
+﻿@model WebAppCom.Models.Product
+
+@{
+    ViewData["Title"] = "Detalles del Producto";
+}
+
+
+<!-- Default box -->
+<div class="card card-solid">
+    <div class="card-header">
+        <a asp-action="Index" class="btn btn-light border-dark float-left"><i class="fas fa-arrow-left d-inline"></i></a>
+        <div class="float-right">
+            <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-light border-dark">
+                Editar
+                <i class="fas fa-pen-alt"></i>
+            </a>
+            |
+            <a class="btn btn-outline-primary" onclick="showInPopup('@Url.Action("AddBarCode","Products",new { id = Model.ProductId},Context.Request.Scheme)','Asignar Codigo de Barras')">
+                <i class="fa fa-barcode fa-fw hover" aria-hidden="true"></i>&nbsp; Barras
+            </a>
+            |
+            <a class="btn btn-outline-success" onclick="showInPopup('@Url.Action("AddBodega","Products",new { id = Model.ProductId})','Asignar Bodega')">
+                <i class="fa fa-building fa-fw hover" aria-hidden="true"></i>&nbsp; Bodega
+            </a>
+            |
+            <a onclick="deleteProduct(@Model.ProductId, '/Products/Delete/')"
+               class="text-danger">
+                <i class="fa fa-trash fa-lg"></i>
+            </a>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <h3 class="d-inline-block d-sm-none"></h3>
+                <div class="col-12">
+                    <img src="~/Source/@Model.ImagePath" class="product-image" alt="Product Image">
+                </div>
+                <div class="col-12 product-image-thumbs">
+                    <div class="product-image-thumb active"><img src="~/Source/@Model.ImagePath" alt="Product Image"></div>
+                    <div class="product-image-thumb"><img src="~/Source/@Model.ImagePath" alt="Product Image"></div>
+                    <div class="product-image-thumb"><img src="~/Source/@Model.ImagePath" alt="Product Image"></div>
+                    <div class="product-image-thumb"><img src="~/Source/@Model.ImagePath" alt="Product Image"></div>
+                    <div class="product-image-thumb"><img src="~/Source/@Model.ImagePath" alt="Product Image"></div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-default text-center active">
+                        <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
+                        <i class="fas fa-building"></i>
+                        @Model.Department.Description
+                    </label>
+                </div>
+                <h3 class="my-3">@Model.Description</h3>
+                <p>@Model.Note</p>
+                <hr>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-default text-center">
+                        <input type="radio" name="color_option" id="color_option1" autocomplete="off">
+                        @if (@ViewBag.valor != null)
+                        {
+                            <barcode content="@ViewBag.valor" width="200" height="100" />
+                        }
+                        else
+                        {
+                            <h4>Sin Codigo de barras</h4>
+                        }
+                        <br />
+                        @ViewBag.valor
+                    </label>                    
+                </div>
+                <div class="bg-gray py-2 px-3 mt-4">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2 class="mb-0">
+                                Precio: <a class="money">@Model.Price</a>
+                            </h2>
+                            <h4 class="mt-0">
+                                <small>@Model.Iva.Description: @Model.Iva.Rate </small>
+                                <br />
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="card card-light">
+                    <div class="card-header">
+                        Almacenes
+                    </div>
+                    <div class="card-body">
+                        <partial name="_GetAllBodegas.cshtml" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->

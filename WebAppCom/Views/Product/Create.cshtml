@@ -1,0 +1,101 @@
+﻿@model WebAppCom.Models.Product
+
+@{
+    ViewData["Title"] = "Nuevo Producto";
+}
+
+<section class="content">
+    <form asp-action="Create" method="post" onsubmit="return jQueryAjaxPost(this);" autocomplete="off" enctype="multipart/form-data">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">General</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" required />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                            <div class="alert-danger text-center" role="alert">
+                                <h5>@ViewBag.empMessenger</h5>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Note" class="control-label"></label>
+                            <textarea asp-for="Note" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Note" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DepartmentId" class="control-label"></label>
+                            <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Más Información</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="Ivaid" class="control-label"></label>
+                                    <select asp-for="Ivaid" class="form-control" asp-items="ViewBag.Ivaid"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label asp-for="Price" class="control-label"></label>
+                                    <input asp-for="Price" class="form-control money" />
+                                    <span asp-validation-for="Price" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label asp-for="MeasureId" class="control-label"></label>
+                                    <select asp-for="MeasureId" class="form-control" asp-items="ViewBag.MeasureId"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label asp-for="Measure" class="control-label"></label>
+                                    <input asp-for="Measure" class="form-control" />
+                                    <span asp-validation-for="Measure" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                <input type="submit" value="Nuevo Producto" class="btn btn-success float-right">
+            </div>
+        </div>
+    </form>
+</section>
